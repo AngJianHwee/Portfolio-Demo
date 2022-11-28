@@ -4,7 +4,7 @@ Keywords: *Flask, Bootstrap, pytest, Queue Implementation from scratch*
 
 URL: *https://ticketing-ang.vercel.app/*
 
-## 2. Satelite Image Classification with Transfer Learning Using ResNet, VGG
+## 2. Satelite Image Classification using CNN and Transfer Learning with ResNet, VGG
 
 Keywords: *PyTorch, ResNet, VGG, Transfer Learning*
 
