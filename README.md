@@ -15,6 +15,7 @@ URL: *https://ticketing-ang.vercel.app/*
 
 Keywords: *MySQL, ER Diagram, Schema Diagram, DDL, DML*
 
+
 ## 4. Clipboard Sharing using Redis:
 
 Keywords: *Redis, Flask*
