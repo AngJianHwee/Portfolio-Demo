@@ -6,7 +6,7 @@ URL: *https://www.kaggle.com/code/megahwee/cisc3024-ang-jian-hwee-emily-choo-hue
 
 ## 2. Ticketing Website with Customer View and Admin View:
 
-Framework: *Flask, Bootstrap, Queue Implementation from scratch, pytest*
+Framework: *Flask, Bootstrap, pytest, Queue Implementation from scratch*
 
 URL: *https://ticketing-ang.vercel.app/*
 
