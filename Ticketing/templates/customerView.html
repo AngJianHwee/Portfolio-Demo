@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!-- <style>
+        [class*="col"]{
+            padding: 1rem;
+            background-color:  #33b5e5;
+            border:  2px solid #fff;
+            color:  #fff;
+        }
+    </style> -->
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <div class="col-12">
+    </div>
+    <div class="container">
+        <br>
+        <br>
+        <div class="col-12"><a class="btn btn-sm btn-outline-secondary" href="/" role="button">Home</a></div>
+        <br>
+        <br>
+        <div class="col-12">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <!-- <div class="card bg-secondary shadow-sm"> -->
+                    <div class="card-body">
+                        <p class="text-center">Now Serving: {{ now_serving }}</p>
+                        <p class="text-center">Last Number: {{ last_number }}</p>
+                        <div class="col-12 text-center">
+                            <form action="/api/takeNumber" method="POST">
+                                <a class="btn btn-sm btn-outline-secondary" href="#" role="button" onclick="this.parentNode.submit()">Take a number</a>
+                            </form>
+                            <!-- <br> -->
+                            <!-- <br> -->
+                            <!-- <button type="button" class="btn btn-default disabled btn-sm btn-outline-secondary">Take a number</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            {% for i in range(4) %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {% if status[i] == 1 %}
+                        <p class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="green" class="bi bi-dot" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" /></svg></p>
+                        {% elif status[i] == -1 %}
+                        <p class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="red" class="bi bi-dot" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" /></svg></p>
+                        {% else %}
+                        <p class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" /></svg></p>
+                        {% endif %}
+                        <p class="text-center">Counter # {{ i+1 }}</p>
+                        <p class="card text-center">Cur Number: {{ current_serving[i] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+    </div>
+</body>
+
+</html>
