@@ -11,9 +11,9 @@ Keywords: *Flask, Bootstrap, pytest, Queue Implementation from scratch*
 URL: *https://ticketing-ang.vercel.app/*
 
 
-## 3. Database
+## 3. Database Design For Local Food Store
 
-Keywords: *MySQL, ER Diagram, Schema Diagram*
+Keywords: *MySQL, ER Diagram, Schema Diagram, DDL, DML*
 
 ## 4. Clipboard Sharing using Redis:
 
