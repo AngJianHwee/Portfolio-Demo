@@ -1,0 +1,22 @@
+<head>
+    <title>Clipboard Sharing - Ang Jian Hwee</title>
+    <link type="image/png" sizes="32x32" rel="icon" href="https://icons8.com/icons8-source-code-32.png">
+</head>
+
+<body>
+    <form action="/newMessage" method="POST">
+        <div>
+        <label for="expiredInSeconds">Expired in seconds (default 10000s): </label>
+        <input type="text" name="expiredInSeconds" placeholder="10000" value="10000">
+        </div>
+        <br>
+        <div>
+        <label for="content">Message Content:</label>
+        <br>
+        <textarea name="content" placeholder="Message content" rows="15" cols="60" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
