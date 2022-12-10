@@ -2,7 +2,7 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-12-10 16:51:42
+# @Last Modified time: 2022-12-10 16:53:26
 
 from flask import Flask, render_template_string, request, redirect, render_template
 import redis, datetime
@@ -36,18 +36,10 @@ def newMessage():
     content = request.form['content']
 
     r.setex(f'A{cur_increment:04d}', request.form['expiredInSeconds'], content)
+    r.incr("cur_increment")
+
     key = f'A{cur_increment:04d}'
     ttl = r.ttl(key)
-
-    new_string = f'''
-        Your link is <a href = "/message/A{cur_increment:04d}">{request.host_url[:-1]}/message/A{cur_increment:04d}</a>
-        <br><hr>
-        Expired in {request.form['expiredInSeconds']} seconds.
-        <br><hr>
-        <textarea rows="15" cols="60" required>{content}</textarea>
-        '''
-
-    r.incr("cur_increment")
 
     return render_template(
         "newMessage.html",
@@ -58,12 +50,10 @@ def newMessage():
             datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"),
         url=f"/message/A{cur_increment:04d}",
         host_url=request.host_url[:-1])
-    return render_template_string(new_string)
 
 
 @app.route('/message/<key>', methods=["GET"])
 def message(key):
-    # return render_template_string(message_dict[key])
     try:
         ttl = r.ttl(key)
         return render_template(
@@ -73,9 +63,6 @@ def message(key):
             exp_datetime=(
                 datetime.datetime.now() +
                 datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
-        return render_template_string(
-            f'<textarea rows="15" cols="60" required>{r.get(key).decode("UTF-8")}</textarea>'
-        )
     except AttributeError:
         return "Invalid Message!"
 
