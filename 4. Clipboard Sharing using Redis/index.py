@@ -2,10 +2,11 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-12-10 19:15:13
+# @Last Modified time: 2022-12-10 20:16:36
 
 from flask import Flask, render_template_string, request, redirect, render_template
 import redis, datetime
+from werkzeug.utils import secure_filename
 
 try:
     r = redis.Redis("redis-1bbf2d0d-nightorb-d1fc.aivencloud.com", 21416, 0,
@@ -17,6 +18,7 @@ except:
     r.ping()
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = "."
 
 
 @app.route('/')
@@ -31,7 +33,21 @@ def newMessage():
 
     if r.get("cur_increment") is None:
         r.set("cur_increment", 1)
+#########################################################################
 
+    # print(request.files, flush = True)
+    # print(vars(request.files), flush = True)
+    # f = request.files['file']
+    # f.save(secure_filename(f.filename))
+    
+    # print(request.form, flush = True)
+    # print(vars(request.form), flush = True)
+    print(vars(request.files), flush = True)
+    # print(dir(request.form), flush = True)
+    # print(request.form['file'], flush = True)
+    # print(type(request.form['file']), flush = True)
+    
+#########################################################################
     cur_increment = int(r.get("cur_increment").decode('UTF-8'))
     content = request.form['content']
 
