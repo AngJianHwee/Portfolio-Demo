@@ -2,17 +2,18 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-12-10 11:29:11
-
+# @Last Modified time: 2022-12-10 16:51:42
 
 from flask import Flask, render_template_string, request, redirect, render_template
-import redis
+import redis, datetime
 
 try:
-    r = redis.Redis("redis-269b983e-spacehotline-c3fa.aivencloud.com",22352, 0, 'AVNS_5OPWSuYPF7QPibRVAh5')
+    r = redis.Redis("redis-269b983e-spacehotline-c3fa.aivencloud.com", 22352,
+                    0, 'AVNS_5OPWSuYPF7QPibRVAh5')
     r.ping()
 except:
-    r = redis.Redis("redis-10701.c62.us-east-1-4.ec2.cloud.redislabs.com",10701, 0, 'G5geqLgrwhoY569qaXYWcX6oNCHdFWht')
+    r = redis.Redis("redis-10701.c62.us-east-1-4.ec2.cloud.redislabs.com",
+                    10701, 0, 'G5geqLgrwhoY569qaXYWcX6oNCHdFWht')
     r.ping()
 
 app = Flask(__name__)
@@ -35,6 +36,8 @@ def newMessage():
     content = request.form['content']
 
     r.setex(f'A{cur_increment:04d}', request.form['expiredInSeconds'], content)
+    key = f'A{cur_increment:04d}'
+    ttl = r.ttl(key)
 
     new_string = f'''
         Your link is <a href = "/message/A{cur_increment:04d}">{request.host_url[:-1]}/message/A{cur_increment:04d}</a>
@@ -46,6 +49,15 @@ def newMessage():
 
     r.incr("cur_increment")
 
+    return render_template(
+        "newMessage.html",
+        content=r.get(key).decode("UTF-8"),
+        ttl=ttl,
+        exp_datetime=(
+            datetime.datetime.now() +
+            datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"),
+        url=f"/message/A{cur_increment:04d}",
+        host_url=request.host_url[:-1])
     return render_template_string(new_string)
 
 
@@ -53,7 +65,17 @@ def newMessage():
 def message(key):
     # return render_template_string(message_dict[key])
     try:
-        return render_template_string(f'<textarea rows="15" cols="60" required>{r.get(key).decode("UTF-8")}</textarea>')
+        ttl = r.ttl(key)
+        return render_template(
+            "text.html",
+            content=r.get(key).decode("UTF-8"),
+            ttl=ttl,
+            exp_datetime=(
+                datetime.datetime.now() +
+                datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
+        return render_template_string(
+            f'<textarea rows="15" cols="60" required>{r.get(key).decode("UTF-8")}</textarea>'
+        )
     except AttributeError:
         return "Invalid Message!"
 
