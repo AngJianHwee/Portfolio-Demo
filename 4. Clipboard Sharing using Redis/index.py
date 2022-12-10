@@ -2,7 +2,7 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-12-10 20:16:36
+# @Last Modified time: 2022-12-11 03:19:29
 
 from flask import Flask, render_template_string, request, redirect, render_template
 import redis, datetime
@@ -77,7 +77,8 @@ def message(key):
             content=r.get(key).decode("UTF-8"),
             ttl=ttl,
             exp_datetime=(
-                datetime.datetime.now() +
+                datetime.datetime.utcnow() +
+                datetime.timedelta(hours=8) +
                 datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
     except AttributeError:
         return render_template('invalidMessage.html')
