@@ -2,7 +2,7 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-12-10 16:53:26
+# @Last Modified time: 2022-12-10 17:02:28
 
 from flask import Flask, render_template_string, request, redirect, render_template
 import redis, datetime
@@ -64,12 +64,13 @@ def message(key):
                 datetime.datetime.now() +
                 datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
     except AttributeError:
-        return "Invalid Message!"
+        return render_template('invalidMessage.html')
 
 
 @app.route('/reset', methods=["GET"])
 def reset():
     if r.flushdb():
-        return "Reset sucessfully."
+        reset_status = "Success"
     else:
-        return "Reset failed."
+        reset_status = "Failed"
+    return render_template('reset.html', reset_status=reset_status)
