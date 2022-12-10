@@ -2,14 +2,14 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-12-10 19:00:29
+# @Last Modified time: 2022-12-10 19:15:13
 
 from flask import Flask, render_template_string, request, redirect, render_template
 import redis, datetime
 
 try:
-    r = redis.Redis("redis-269b983e-spacehotline-c3fa.aivencloud.com", 22352,
-                    0, 'AVNS_5OPWSuYPF7QPibRVAh5')
+    r = redis.Redis("redis-1bbf2d0d-nightorb-d1fc.aivencloud.com", 21416, 0,
+                    'AVNS_RjXI0p9WSMhwkj2j1RW')
     r.ping()
 except:
     r = redis.Redis("redis-10701.c62.us-east-1-4.ec2.cloud.redislabs.com",
@@ -75,6 +75,10 @@ def _reset():
         reset_status = "Failed"
     return render_template('reset.html', reset_status=reset_status)
 
+
 @app.route('/status', methods=["GET"])
 def _status():
-    return render_template_string(str(vars(vars(r)['connection_pool'])['connection_kwargs']['host'].split(".")[-2]))
+    return render_template_string(
+        str(
+            vars(vars(r)['connection_pool'])['connection_kwargs']
+            ['host'].split(".")[-2]))
