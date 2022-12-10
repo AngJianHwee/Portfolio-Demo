@@ -2,14 +2,18 @@
 # @Author: Ang Jian Hwee
 # @Date:   2022-09-19 22:58:23
 # @Last Modified by:   Ang Jian Hwee
-# @Last Modified time: 2022-11-28 11:52:06
+# @Last Modified time: 2022-12-10 11:24:03
 
 
 from flask import Flask, render_template_string, request, redirect, render_template
 import redis
 
-r = redis.Redis("redis-269b983e-spacehotline-c3fa.aivencloud.com",22352, 0, 'AVNS_5OPWSuYPF7QPibRVAh5')
-r.ping()
+try:
+    r = redis.Redis("redis-269b983e-spacehotline-c3fa.aivencloud.com",22352, 0, 'AVNS_5OPWSuYPF7QPibRVAh5')
+    r.ping()
+except:
+    r = redis.Redis("redis-10701.c62.us-east-1-4.ec2.cloud.redislabs.com",10701, 0, 'G5geqLgrwhoY569qaXYWcX6oNCHdFWht')
+    r.ping()
 
 app = Flask(__name__)
 
