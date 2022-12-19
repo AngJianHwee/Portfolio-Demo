@@ -22,3 +22,9 @@ Keywords: *Redis, Flask*
 
 URL: *https://clipboard-sharing.vercel.app/*
 
+## 5. Malaysia Covid-19 PowerBI dashboard report:
+
+Keywords: *PowerBI*
+
+URL: *https://app.powerbi.com/view?r=eyJrIjoiNTFlMGYzYWUtMDBkZS00MDU0LWI0OWUtYWFmYmQ0Y2M5ODYyIiwidCI6Ijc2ZWVlYzQ2LWZlNDAtNGUxYi1hYjQyLTFkNmQ5ZjkxYjhhOSIsImMiOjEwfQ%3D%3D&pageName=ReportSection*
+
