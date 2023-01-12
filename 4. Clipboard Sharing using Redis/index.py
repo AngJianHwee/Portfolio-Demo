@@ -4,7 +4,7 @@
 # @Last Modified by:   Ang Jian Hwee
 # @Last Modified time: 2022-12-11 03:31:22
 
-from flask import Flask, render_template_string, request, redirect, render_template
+from flask import Flask, render_template_string, request, redirect, render_template, url_for
 import redis, datetime
 from werkzeug.utils import secure_filename
 import hashlib
@@ -100,3 +100,9 @@ def _status():
         str(
             vars(vars(r)['connection_pool'])['connection_kwargs']
             ['host'].split(".")[-2]))
+
+@app.route('/latest', methods=["GET"])
+def latest():
+    cur_increment = int(r.get("cur_increment").decode('UTF-8')) - 1
+    key = f'A{cur_increment:04d}'
+    return redirect(f'/message/{key}')
