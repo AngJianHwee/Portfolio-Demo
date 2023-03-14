@@ -5,7 +5,8 @@
 # @Last Modified time: 2022-12-11 03:31:22
 
 from flask import Flask, render_template_string, request, redirect, render_template, url_for
-import redis, datetime
+import redis
+import datetime
 from werkzeug.utils import secure_filename
 import hashlib
 
@@ -40,14 +41,14 @@ def newMessage():
     # print(vars(request.files), flush = True)
     # f = request.files['file']
     # f.save(secure_filename(f.filename))
-    
+
     # print(request.form, flush = True)
     # print(vars(request.form), flush = True)
-    print(vars(request.files), flush = True)
+    print(vars(request.files), flush=True)
     # print(dir(request.form), flush = True)
     # print(request.form['file'], flush = True)
     # print(type(request.form['file']), flush = True)
-    
+
 #########################################################################
     cur_increment = int(r.get("cur_increment").decode('UTF-8'))
     content = request.form['content']
@@ -101,8 +102,26 @@ def _status():
             vars(vars(r)['connection_pool'])['connection_kwargs']
             ['host'].split(".")[-2]))
 
+
 @app.route('/latest', methods=["GET"])
+@app.route('/l', methods=["GET"])
 def latest():
     cur_increment = int(r.get("cur_increment").decode('UTF-8')) - 1
     key = f'A{cur_increment:04d}'
-    return redirect(f'/message/{key}')
+
+    # return redirect(url_for('message', key=key), code=302)
+
+    try:
+        ttl = r.ttl(key)
+        return render_template(
+            "text.html",
+            content=r.get(key).decode("UTF-8"),
+            ttl=ttl,
+            exp_datetime=(
+                datetime.datetime.utcnow() +
+                datetime.timedelta(hours=8) +
+                datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
+    except AttributeError:
+        return render_template('invalidMessage.html')
+
+    #
