@@ -67,12 +67,14 @@ def message(key):
             exp_datetime=(
                 datetime.datetime.utcnow() +
                 datetime.timedelta(hours=8) +
-                datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
+                datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"),
+            url=f"/message/{key}",
+            host_url=request.host_url[:-1])
     except AttributeError:
         return render_template('invalidMessage.html')
 
 
-@app.route('/reset', methods=["GET"])
+@ app.route('/reset', methods=["GET"])
 def _reset():
     if r.flushdb():
         reset_status = "Success"
@@ -81,7 +83,7 @@ def _reset():
     return render_template('reset.html', reset_status=reset_status)
 
 
-@app.route('/status', methods=["GET"])
+@ app.route('/status', methods=["GET"])
 def _status():
     return render_template_string(
         str(
@@ -89,8 +91,8 @@ def _status():
             ['host'].split(".")[-2]))
 
 
-@app.route('/latest', methods=["GET"])
-@app.route('/l', methods=["GET"])
+@ app.route('/latest', methods=["GET"])
+@ app.route('/l', methods=["GET"])
 def latest():
     cur_increment = int(r.get("cur_increment").decode('UTF-8')) - 1
     key = f'A{cur_increment:04d}'
