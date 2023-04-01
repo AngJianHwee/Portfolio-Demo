@@ -27,6 +27,11 @@
             <div class="col-9">
                 <br>
                 <div class="mb-3">
+                    <label for="expiredInSeconds" class="form-label">link:
+                        <a href="{{ url }}">{{host_url}}{{ url }}</a>
+                    </label>
+                </div>
+                <div class="mb-3">
                     <label for="expiredInSeconds" class="form-label">Expired:
                         <span class="text-primary">{{ ttl }}s remaining</span>
                         <span class="text-primary">({{ exp_datetime }} UTC+8)</span>

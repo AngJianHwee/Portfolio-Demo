@@ -35,21 +35,7 @@ def newMessage():
 
     if r.get("cur_increment") is None:
         r.set("cur_increment", 1)
-#########################################################################
 
-    # print(request.files, flush = True)
-    # print(vars(request.files), flush = True)
-    # f = request.files['file']
-    # f.save(secure_filename(f.filename))
-
-    # print(request.form, flush = True)
-    # print(vars(request.form), flush = True)
-    print(vars(request.files), flush=True)
-    # print(dir(request.form), flush = True)
-    # print(request.form['file'], flush = True)
-    # print(type(request.form['file']), flush = True)
-
-#########################################################################
     cur_increment = int(r.get("cur_increment").decode('UTF-8'))
     content = request.form['content']
 
@@ -113,6 +99,7 @@ def latest():
 
     try:
         ttl = r.ttl(key)
+
         return render_template(
             "text.html",
             content=r.get(key).decode("UTF-8"),
@@ -120,7 +107,9 @@ def latest():
             exp_datetime=(
                 datetime.datetime.utcnow() +
                 datetime.timedelta(hours=8) +
-                datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"))
+                datetime.timedelta(seconds=ttl)).strftime("%m/%d/%Y %H:%M:%S"),
+            url=f"/message/{key}",
+            host_url=request.host_url[:-1])
     except AttributeError:
         return render_template('invalidMessage.html')
 
