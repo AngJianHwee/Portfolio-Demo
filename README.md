@@ -27,3 +27,9 @@ URL: *https://clipboard-sharing.vercel.app/*
 Keywords: *Embeddings, VectorDB, OpenAI GPT API*
 
 URL: *https://github.com/AngJianHwee/Portfolio-Demo/blob/main/5.%20Retrieval%20Augmented%20Generation/retrieval-augmented%20generation.ipynb*
+
+## 6. Human Face Detection and Landmark Location
+
+Keywords: *DeepLabV3, MTCNN, DeepFace, OpenCV*
+
+This projects aims to use pretrained models to detect human face landmarks and perform alignment. Further analysis is still in progress.
