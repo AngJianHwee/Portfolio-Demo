@@ -22,9 +22,8 @@ Keywords: *Redis, Flask*
 
 URL: *https://clipboard-sharing.vercel.app/*
 
-## 5. Malaysia Covid-19 PowerBI dashboard report:
+## 5. Retrieval Augmented Generation:
 
-Keywords: *PowerBI*
+Keywords: *Embeddings, VectorDB, OpenAI GPT API*
 
-URL: *https://app.powerbi.com/view?r=eyJrIjoiNTFlMGYzYWUtMDBkZS00MDU0LWI0OWUtYWFmYmQ0Y2M5ODYyIiwidCI6Ijc2ZWVlYzQ2LWZlNDAtNGUxYi1hYjQyLTFkNmQ5ZjkxYjhhOSIsImMiOjEwfQ%3D%3D&pageName=ReportSection*
-
+URL: *https://github.com/AngJianHwee/Portfolio-Demo/blob/main/5.%20Retrieval%20Augmented%20Generation/retrieval-augmented%20generation.ipynb*
