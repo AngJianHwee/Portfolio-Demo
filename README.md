@@ -33,3 +33,5 @@ URL: *https://github.com/AngJianHwee/Portfolio-Demo/blob/main/5.%20Retrieval%20A
 Keywords: *DeepLabV3, MTCNN, DeepFace, OpenCV*
 
 This projects aims to use pretrained models to detect human face landmarks and perform alignment. Further analysis is still in progress.
+
+URL: *https://github.com/AngJianHwee/Portfolio-Demo/blob/main/6.%20Human%20Face%20Detection%20and%20Landmark%20Location/Human%20Face%20Detection%20and%20Landmark%20Location.ipynb*
